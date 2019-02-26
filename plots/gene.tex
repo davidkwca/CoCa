@@ -1,0 +1,47 @@
+\begin{figure}[t]
+  \begin{minipage}[b]{0.5\linewidth}
+  \begin{tikzpicture}
+    \begin{axis}[eda line, ymax = 1.0, ymin = 0, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+          ylabel={Accuracy}, xlabel={Decision Rate},
+          ylabel near ticks, xlabel near ticks,
+          tick label style={font=\footnotesize},
+          label style={font=\footnotesize},
+	      height=3.5cm, width=3.95cm,
+	      legend pos=south east, legend columns=1,
+	      legend style={nodes={scale=0.5, transform shape}, at={(0.75,0.35)},anchor=north},
+    	  xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+      \addplot[name path=l, dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};
+      %\addplot[name path=u, color=gainsboro, forget plot] table[x index = 0, y index = 1, header = false] {expres/gn/2_upper.dat};
+      %\addplot [gainsboro, forget plot] fill between[of=u and l];
+      
+      \addplot+[mambacolor1] table[x index = 0, y index = 1, header = false] {expres/gn/dr_gn_2.dat};
+      %\addplot[red, dashed, name path=L] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/gn/2_lower.dat};
+      %\addplot[red, dotted, name path=U] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/gn/2_upper.dat};
+      %\addplot[pattern=north west lines, pattern color=red!50]fill between[of=L and U, soft clip={domain=0:1}];
+
+    \end{axis}
+  \end{tikzpicture}%
+  \end{minipage}%
+  \begin{minipage}[b]{0.5\linewidth}
+  \begin{tikzpicture}
+    \begin{axis}[eda line, ymax = 0.10, ymin = 0.0, ytick={0.1,0.08,0.06,0.04,0.02,0.0},
+          ylabel={Confidence}, xlabel={Decision Rate},
+          ylabel near ticks, xlabel near ticks,
+          tick label style={font=\footnotesize},
+          label style={font=\footnotesize},
+	      height=3.5cm, width=3.95cm,
+	      legend pos=south east, legend columns=1,
+	      legend style={nodes={scale=0.5, transform shape}, at={(0.75,0.35)},anchor=north},
+    	  xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+          \addplot+[mambacolor1, line width=0.6pt] table[x index = 0, y index = 1, header = false] {expres/gn/dr_gn_2_conf.dat};
+    \end{axis}
+  \end{tikzpicture}      
+  \end{minipage}
+  \hfill~
+  \label{fig:gn}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

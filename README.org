@@ -1,0 +1,92 @@
+* What is this?
+  This is a bunch of badly written code to attempt distinguishing between datasets which are causal and which are confounded.
+  I.e. given some data X and Y where it /looks/ as if X causes Y, we want to know whether there might actually be a better explanation by assuming that they are both caused by some common latent variable Z.
+
+  Here, this is done by comparing a model where the relationship between X and Y is linear, and a model where the relationship between Z and (X, Y) is linear.
+* Environment and Data
+  The precise packages used for this project are listed in ~requirements.txt~.
+  All data is contained in the ~data~ directory or has to be created by running a script as explained below.
+  The data in ~data/gene_network~ is taken from the DREAM3 challenge[fn:1]. The data in ~data/tubingen-pairs~ is taken from the Tübingen pairs database for cause-effect pairs[fn:2].
+* How do I use this?
+  If you are looking at this code base, you 
+  a) want to reproduce my results, or
+  b) run it on your own dataset,
+  c) or you just want to know how the code works.
+  If c) is the case, the only interesting file for you is most likely ~model.py~. Everything else is just machinery to actually run the models on datasets and to generate plots from the outputs.
+  If you're interested in a) or b), read on.
+** Reproducing results
+   Before being able to run any of the commands noted below, please first change the variables ~THEANOPATH, PYTHONPATH, RUNPATH~ in ~scripts/paths.sh~ to match your setup and change ~RESULTS_PATH~ to reflect where the results are stored.
+   The output directory for the data used to generate tikz images is controlled by ~TIKZ_PATH~ in ~config.py~.
+*** Synthetic Experiments (Section 5.1)
+    To do this, we first need to generate the synthetic data used in the synthetic experiments before we can do anything.
+    To do this, use either
+    #+BEGIN_SRC shell
+    python data_generation.py -data 'dr'
+    #+END_SRC
+    to generate the data for the decision rate plots, or use
+    #+BEGIN_SRC shell
+    python data_generation.py -data 'heat'
+    #+END_SRC
+    to generate data for the heatmap. Note that this may take a while because a lot of data is generated for all the different combinations of dimensionalities and generating distributions.
+
+    After we've done this, we can actually run the code on this data.
+    The easiest way to do this is by running
+    #+BEGIN_SRC shell
+    bash scripts/synthetic_script.sh
+    #+END_SRC
+    or
+    #+BEGIN_SRC shell
+    bash scripts/heatmap_script.sh
+    #+END_SRC
+    for the decision rate plots and heatmap plots, respectively.
+
+    To generate the plots from this data, use
+    #+BEGIN_SRC shell
+    python tikz_data.py -data 'dr'
+    #+END_SRC
+    or 
+    #+BEGIN_SRC shell
+    python tikz_data.py -data 'heat'
+    #+END_SRC
+    respectively.
+    The data relevant to the comparisons with the methods from Janzing and Schölkopf are already included when running ~dr_script.sh~.
+*** Genetic Networks (Section 5.2)
+    For the genetic networks, the data can be found in ~data/gene_network/~. To run the script to generate the data for the plots, use
+    #+BEGIN_SRC shell
+    bash scripts/gn_script.sh
+    #+END_SRC
+
+    To generate the plots from this data, use
+    #+BEGIN_SRC shell
+    python tikz_data.py -data 'gene'
+    #+END_SRC
+*** Tübingen Pairs (Section 5.3)
+    For the Tübingen pairs, the data can be found in ~data/tubingen-pairs/~. To generate the data for the plots, run
+    #+BEGIN_SRC shell
+    bash scripts/pair_script.sh
+    #+END_SRC
+
+    To generate the plots from this data, use
+    #+BEGIN_SRC shell
+    python tikz_data.py -data 'pair'
+    #+END_SRC
+*** Optical Data (Section 5.4)
+    For the optical data, the data can be found in ~other_code/confounder_detection_linear/data/optical_device/~. To run the script to generate the data for the plots, simply run
+    #+BEGIN_SRC shell
+    bash scripts/optic_script.sh
+    #+END_SRC
+
+    To generate the plots from this data, use
+    #+BEGIN_SRC shell
+    python tikz_data.py -data 'optic'
+    #+END_SRC
+*** Generating the plots
+** Running it on your own data
+   To run the method on any data, simply run
+   #+BEGIN_SRC shell
+   python run_on_any_data.py -in DATA_FILE -out OUTPUT_FILE -delim DELIMITER
+   #+END_SRC
+   If ~OUTPUT_FILE~ is missing, the outputs will be printed to the command line instead. If ~DELIMITER~ is not given, the data will be assumed to be separated by a single space. Further, the data for ~Y~ is assumed to be in the last column of the data. 
+* Footnotes
+[fn:1] http://dreamchallenges.org/project/dream-3-in-silico-network-challenge/
+[fn:2] https://webdav.tuebingen.mpg.de/cause-effect/

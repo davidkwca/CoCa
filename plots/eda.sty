@@ -1,0 +1,327 @@
+\ProvidesPackage{eda}[2017/05/17 v0.02 LaTeX package for Tufte style plots]
+%% Changelog:
+%%     Date       Version  Author
+%% *** 2017/05/17   v0.02  Janis Kalofolias
+%% Minor edits to allow fine tuning of theorems and enumitem
+%% (Useful for the IEEE document class)
+%% 
+%% *** 2016/06/03   v0.01  Jilles Vreeken
+%% Creation of the original style file.
+%%
+
+%% \usepackage[ <draft> | <final> ,theorems, IEEEtran ]{eda}
+%%
+%% Copyright 2016-2017 Jiles Vreeken
+%%
+%% ** Contributors:
+%% Janis Kalofolias
+
+\newif\ifenumitem\enumitemtrue % Include enumitem
+\newif\iftheorems\theoremsfalse % Add theorems
+\newif\iffinal\finaltrue % Final
+\newif\ifdraft\finalfalse % Final
+
+\DeclareOption{final}{\finaltrue}
+\DeclareOption{draft}{\finalfalse}
+\DeclareOption{notheorems}{\theoremsfalse}
+\DeclareOption{noenumitem}{\enumitemfalse}
+\DeclareOption*{\PackageWarning{eda}{Unknown option `\CurrentOption'}}
+\ProcessOptions\relax
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage[english]{babel}
+\ifenumitem
+\RequirePackage{enumitem} % for adjusting enum/itemize
+\fi
+\RequirePackage{booktabs}
+\RequirePackage{color}
+\RequirePackage{fancyhdr}
+\RequirePackage{graphicx}
+\RequirePackage{pgfplots}
+\RequirePackage{tikz}
+\RequirePackage{url}
+\RequirePackage{verbatim}
+\RequirePackage{xspace}
+\RequirePackage{ifpdf}
+\begingroup\expandafter\expandafter\expandafter\endgroup	% only include these for pre-2015 LaTeX kernels
+\expandafter\ifx\csname IncludeInRelease\endcsname\relax
+\RequirePackage{fixltx2e} % for allowing complex LaTeX runs
+\fi
+
+%%% to be worked-in
+\iftheorems
+% \newtheorem{name}[counter]{Printed output}
+\RequirePackage{amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\fi
+
+%%% Notation
+%% n-by-m:		\by{n}{m}	
+\newcommand{\by}{\@ifstar%
+	\BYstar%
+	\BYnoStar%
+}
+\newcommand{\BYstar}[2]{#1\nobreakdash-by\nobreakdash-#2}
+\newcommand{\BYnoStar}[2]{\ensuremath{#1\text{\nobreakdash-by\nobreakdash-}#2}}
+
+%% |x|:		\abs{x}
+\newcommand{\abs}[1]{\left|{#1}\right|}
+
+%% arg max:	\argmax
+\ifx \argmax \else
+\DeclareMathOperator*{\argmax}{arg\, max}
+\fi
+
+%% arg min:	\argmin
+\ifx \logmin \else
+\DeclareMathOperator*{\argmin}{arg\, min}
+\fi
+
+%% log log:	\loglog
+\ifx \loglog \else
+\DeclareMathOperator*{\loglog}{log\, log}
+\fi
+
+\RequirePackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
+
+
+
+%%% Commenting
+%% comments:	\note
+\providecommand{\note}[1]{{{\color{red} #1}}}
+\iffinal
+\ifx\note\undefined
+\newcommand{\note}[1]{{}}%
+\else
+\renewcommand{\note}[1]{{}}%
+\fi
+\else
+\ifx\note\undefined
+\newcommand{\note}[2][red]{{{\color{#1} #2}}}%
+\else
+\renewcommand{\note}[2][red]{{{\color{#1} #2}}}%
+\fi
+\fi
+
+
+%%% Plotting
+
+% our color collection
+% credit: http://latexcolor.com/
+\RequirePackage{eda-colors}
+
+\definecolor{yafcolor1}{rgb}{0.4, 0.165, 0.553}
+\definecolor{yafcolor2}{rgb}{0.949, 0.482, 0.216}
+\definecolor{yafcolor3}{rgb}{0.47, 0.549, 0.306}
+\definecolor{yafcolor4}{rgb}{0.925, 0.165, 0.224}
+\definecolor{yafcolor5}{rgb}{0.141, 0.345, 0.643}
+\definecolor{yafcolor6}{rgb}{0.965, 0.933, 0.267}
+\definecolor{yafcolor7}{rgb}{0.627, 0.118, 0.165}
+\definecolor{yafcolor8}{rgb}{0.878, 0.475, 0.686}
+
+% custom color cycle list here
+\pgfplotscreateplotcyclelist{yaf}{%
+	{yafcolor1},
+	{yafcolor2},
+	{yafcolor3},
+	{yafcolor4},
+	{yafcolor5},
+	{yafcolor6},
+	{yafcolor7},
+	{yafcolor8}
+}
+
+\pgfplotscreateplotcyclelist{wrongright}{%
+	{mambacolor3},
+	{mambacolor6}
+}
+
+\colorlet{mambacolor1}{indigo(web)}
+\colorlet{mambacolor2}{internationalorange}
+\colorlet{mambacolor3}{green(ryb)}
+\colorlet{mambacolor4}{richelectricblue}
+\colorlet{mambacolor5}{goldenpoppy}
+\colorlet{mambacolor6}{crimson}
+\colorlet{mambacolor7}{airforceblue}
+
+% custom color cycle list here
+\pgfplotscreateplotcyclelist{mamba}{%
+	{mambacolor1},
+	{mambacolor2},
+	{mambacolor3},
+	{mambacolor4},
+	{mambacolor5},
+	{mambacolor6},
+	{mambacolor7}
+}
+
+
+% custom color cycle list here
+\pgfplotscreateplotcyclelist{mamba}{%
+	{indigo(web)},
+	{internationalorange},
+	{green(ryb)},
+	{richelectricblue},
+	{goldenpoppy},
+	{crimson},
+	{airforceblue}
+}
+
+% color list for ybar plot
+\pgfplotscreateplotcyclelist{mamba-bar}{%
+	{indigo(web), fill=indigo(web)},
+	{internationalorange, fill=internationalorange},
+	{green(ryb), fill=green(ryb)},
+	{richelectricblue, fill=richelectricblue},
+	{goldenpoppy, fill=goldenpoppy},
+	{crimson, fill=crimson},
+	{airforceblue, fill=airforceblue}
+} 
+
+% alternative color list for ybar plot
+\pgfplotscreateplotcyclelist{sb-line}{%
+	{caribbeangreen},
+	{denim},
+	{scarlet},
+	{green(munsell)},
+}
+
+\pgfplotscreateplotcyclelist{sb-bar}{%
+	{caribbeangreen, fill=caribbeangreen},
+	{denim, fill=denim},
+	{scarlet, fill=scarlet},
+	{green(munsell), fill=green(munsell)},
+}
+
+% tufte style for line plot
+% credit: http://pgfplots.net/tikz/examples/tufte-3d-axes/
+\pgfplotsset{
+	%
+	% #1 = x, y, or z
+	% #2 = the shift value
+	/tikz/normal shift/.code 2 args = {%
+		\pgftransformshift{%
+			\pgfpointscale{#2}{\pgfplotspointouternormalvectorofticklabelaxis{#1}}%
+		}%
+	},%
+	%
+	eda line/.style={
+		no markers,
+		cycle list name		= mamba,
+		tick align        	= outside,
+		scaled ticks      	= false,
+		enlargelimits     	= false,
+		ticklabel shift   	= {10pt},
+		axis lines*       	= left,
+		line cap          	= round,
+		clip              	= false,
+		tick style    		= {thin, black, major tick length=2pt},
+		x tick label style 	= {font=\scriptsize, yshift = 1pt},
+		y tick label style 	= {font=\scriptsize, xshift = 1pt},
+		xtick style       	= {normal shift={x}{10pt}},
+		ytick style       	= {normal shift={y}{10pt}},
+		x axis line style 	= {thick,normal shift={x}{10pt}},
+		y axis line style 	= {thick,normal shift={y}{10pt}},
+		x label style 		= {at={(axis description cs:0.5,-0.09)}, anchor=north, font=\scriptsize},
+		y label style 		= {at={(axis description cs:0.05,0.5)}, anchor=south, font=\scriptsize},
+		legend cell align 	= left,
+		legend style 		= {inner sep = 1pt, cells = {font=\scriptsize}, },
+		legend image code/.code={%
+			\draw[mark repeat=2,mark phase=2,#1] 
+			plot coordinates { (0cm,0cm) (0.15cm,0cm) (0.3cm,0cm) };% 
+		}
+	}
+}
+
+% tufte style for bar plot 
+% credit: http://latex-community.org/tufte-plots.pdf
+\pgfplotsset{
+	eda ybar/.style={
+		ybar,
+		area legend,
+		ymajorgrids,
+		no markers,
+		axis on top,
+		xtick				= data,
+		cycle list name    	= gscale-bar,
+		tick align        	= outside,
+		enlargelimits     	= false,
+		xmajorgrids 		= false,
+		bar width			= 0.7em,
+		major grid style	= white,
+		axis lines* 		= left,			% only show two lines of the bounding box
+		y axis line style	= {opacity=0},	% but make y-axis invisible
+		major y tick style	= {draw=none},
+		tick style    		= {thin, black, major tick length=2pt},
+		x axis line style 	= {thick, normal shift={x}{0pt}},
+		y tick label style = {font=\scriptsize, xshift=1pt},
+		x tick label style 	= {font=\scriptsize, yshift=1pt},
+		x label style 		= {at={(axis description cs:0.5,0.05)}, anchor=north, font=\scriptsize},
+		y label style 		= {at={(axis description cs:0.2,0.5)}, anchor=south, font=\scriptsize},
+		legend style 		= {inner sep=1pt, cells={font=\scriptsize}, },
+		legend cell align 	= left
+	}
+}
+
+
+% https://tug.org/TUGboat/tb34-2/tb107dugge.pdf
+\pgfplotsset{
+	eda scatter/.style={
+		scatter,
+		only marks,
+		mark				= *,
+		axis lines*			= left,
+		mark size			= 1.5pt,
+		axis line style		= {opacity=0},
+		tick style			= {thin, black},
+		major tick length	= 0.15cm,
+		xtick				= data,
+		xticklabels			= {},
+		ytick 				= data,
+		yticklabels			= {},
+		extra x ticks		= {\pgfplots@data@xmin,\pgfplots@data@xmax},
+		extra y ticks		= {\pgfplots@data@ymin,\pgfplots@data@ymax},
+		extra tick style	= {
+			xticklabel={\pgfmathprintnumber[fixed,fixed zerofill,precision=1]{\tick}}, yticklabel={\pgfmathprintnumber[fixed,fixed zerofill,precision=1]{\tick}}
+		},
+		x label style 		= {at={(axis description cs:0.5,0.05)}, anchor=north, font=\scriptsize},
+		y label style 		= {at={(axis description cs:0.2,0.5)}, anchor=south, font=\scriptsize},
+		y tick label style = {font=\scriptsize, xshift=1pt},
+		x tick label style 	= {font=\scriptsize, yshift=1pt},
+		scatter/use mapped color	= {draw=indigo(web),fill=indigo(web)},
+		legend style 		= {inner sep=1pt, cells={font=\scriptsize}, },
+		legend cell align 	= left
+	}
+}
+
+\pgfplotsset {
+	eda scatter2/.style={
+		scatter,
+		only marks,
+		mark				= *,
+		axis lines*			= left,
+		mark size			= 1pt,
+		tick pos 			= left,
+		tick align			= outside,
+		ticklabel shift   	= {10pt},
+		tick style    		= {thin, black, major tick length=2pt},
+		xtick style       	= {normal shift={x}{10pt}},
+		ytick style       	= {normal shift={y}{10pt}},
+		x tick label style 	= {font=\scriptsize, yshift = 1pt},
+		y tick label style 	= {font=\scriptsize, xshift = 1pt},
+		x axis line style 	= {thick, normal shift={x}{10pt}},
+		y axis line style 	= {thick,normal shift={y}{10pt}},
+		x label style 		= {at={(axis description cs:0.5,-0.05)}, anchor=north, font=\scriptsize},
+		y label style 		= {at={(axis description cs:0.05,0.5)}, anchor=south, font=\scriptsize},
+		scatter/use mapped color={draw=electricindigo, fill=electricindigo},
+		legend style 		= {inner sep=1pt, cells={font=\scriptsize}, },
+		legend cell align 	= left
+	}
+}

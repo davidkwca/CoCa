@@ -1,0 +1,86 @@
+# Copyright (c) 2017  Dominik Janzing  [dominik.janzing@tuebingen.mpg.de]
+# All rights reserved.  See the file COPYING for license terms. 
+
+
+====== Disclaimer========================================
+The user shoud be warned that inferring causal relations from purely observational data is a difficult enterprise. I disrecommend to use this software without understanding its highly idealized model assumptions.
+=========================================================
+
+
+
+====== Reference ========================================
+This is the code reproducing the results of the preprint
+'Detecting non-causal artifacts in multivariate linear regression models' by Dominik Janzing and Bernhard Schoelkopf, arXiv 
+=========================================================
+
+
+
+====== Dependences ======================================
+no special R packages are needed
+=========================================================
+
+
+
+====== Preparation ======================================
+Open the files 'try general real-data.R' 
+ 
+and change the line    path = 'YOUR PATH'  by inserting the path of the directory containing this software
+=========================================================
+
+
+
+====== Run the code =====================================
+Check the respective files for the input of the fucntions
+
+1) To reproduce the scatter plots in Figure 3, run 'plot_true_vs_estimated_beta.R'
+
+2) To reproduce the results displayed in Figure 4, run 'simulate_data_and_test_confounding.R'
+
+3) To reproduce the results displayed in Figure 5, run 'fraction_of_rejections_simulation.R'
+
+4) To reproduce the results displayed in Figure 6, run 'simulate_data_overfitting .R'
+
+5) To reproduce the results in Section 8.1 run 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'optical device' 
+   
+   if you choose either of the 11 data sets not ending with 'random_image_section.txt' or 'pure_confounding.txt' then use the following options 
+   -  header = n
+   -  separator = just type enter
+   -  normalized = n
+   -  component to drop: 10
+
+   if you choose the data set ending with 'random_image_section.txt'   then use the following options
+   -  header = n
+   -  separator = just type enter
+   -  normalized = n
+   -  component to drop:  just type enter
+   the ground truth is beta = 0 in this case  
+
+   if you choose the data set ending with 'pure_confounding.txt' then use the following options
+    -  header = n
+   -  separator = just type enter
+   -  normalized = n
+   -  component to drop: 10   
+   the ground truth is beta = 1 in this case
+
+
+6) To reproduce the results in Section 8.2 run 'apply_method_to_data_from_file.R' 
+   with the following options when prompted:
+   -  choose the data directory 'taste_of_wine' 
+   -  choose the data set 'winequality_red.csv' 
+   -  header = y
+   -  separator = ;
+   -  normalized = y
+   -  component to drop: just type enter
+
+7) To reproduce the results in Section 8.3 run 'apply_method_to_data_from_file.R' 
+   with the following options when prompted:
+   -  choose the data directory 'MEG' 
+   -  choose the data set 'first_10_channels.txt' 
+   -  header = just type enter
+   -  separator = just type enter
+   -  normalized = n
+   enter the component to drop: just type enter
+
+

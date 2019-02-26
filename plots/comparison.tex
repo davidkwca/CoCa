@@ -1,0 +1,69 @@
+\begin{figure*}[t]
+    \begin{minipage}[b]{0.33\linewidth}
+      \begin{tikzpicture}
+        \begin{axis}[eda line, ymax = 1.0, ymin = 0, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+          ylabel={Accuracy}, xlabel={Decision Rate},
+          ylabel near ticks, xlabel near ticks,
+          tick label style={font=\footnotesize},
+          label style={font=\footnotesize},
+          height=3.5cm, width=4.95cm,
+          legend pos=south east, legend columns=1,
+          legend style={nodes={scale=2.0, transform shape}, at={(0.725,0.45)},anchor=north},
+          xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+
+          \addplot+[mambacolor1, line width=0.6pt] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/CC_mixed_dx3_dz3.dat};
+          \addplot+[mambacolor3] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/spectral_mixed_dx3_dz3.dat};
+          \addplot+[mambacolor4] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/indep_mixed_dx3_dz3.dat};
+          \addplot[dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};
+        \end{axis}
+      \end{tikzpicture}
+     \end{minipage}
+	 \begin{minipage}[b]{0.33\linewidth}
+      \begin{tikzpicture}
+        \begin{axis}[eda line, ymax = 1.0, ymin = 0, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+          ylabel={Accuracy}, xlabel={Decision Rate},
+          ylabel near ticks, xlabel near ticks,
+          tick label style={font=\footnotesize},
+          label style={font=\footnotesize},
+          height=3.5cm, width=4.95cm,
+          legend pos=south east, legend columns=1,
+          legend style={nodes={scale=0.5, transform shape}, at={(0.75,0.35)},anchor=north},
+          xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+
+          \addplot+[mambacolor1, line width=0.6pt] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/CC_mixed_dx6_dz3.dat};
+          \addplot+[mambacolor3] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/spectral_mixed_dx6_dz3.dat};
+          \addplot table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/indep_mixed_dx6_dz3.dat};
+          \addplot[dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};
+        \end{axis}
+      \end{tikzpicture}
+     \end{minipage}%
+     \begin{minipage}[b]{0.33\linewidth}
+      \begin{tikzpicture}
+        \begin{axis}[eda line, ymax = 1.0, ymin = 0, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+          ylabel={Accuracy}, xlabel={Decision Rate},
+          ylabel near ticks, xlabel near ticks,
+          tick label style={font=\footnotesize},
+          label style={font=\footnotesize},
+          height=3.5cm, width=4.95cm,
+          legend pos=south east, legend columns=1,
+          legend style={nodes={scale=0.9, transform shape}, at={(0.85,0.4)},anchor=north},
+          xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+
+          \addplot+[mambacolor1, line width=0.6pt] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/CC_mixed_dx9_dz3.dat};
+          \addlegendentry{CoCa}
+          \addplot+[mambacolor3] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/spectral_mixed_dx9_dz3.dat};
+          \addlegendentry{SA}
+          \addplot+[mambacolor4] table[x index = 0, y index = 1, header = true, each nth point=100] {expres/dr/indep_mixed_dx9_dz3.dat};
+          \addlegendentry{ICA}
+          \addplot[dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};
+          % \addplot[mark=none, red] coordinates {(0,0.5) (1,0.5)};
+        \end{axis}
+      \end{tikzpicture}
+    \end{minipage}
+  \label{fig:comparison}
+\end{figure*}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

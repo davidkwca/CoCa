@@ -1,0 +1,56 @@
+\begin{figure}[t]
+  % \begin{adjustbox}{width=\linewidth}
+  %   \begin{minipage}[b]{0.66\linewidth}
+  \begin{tikzpicture}
+    \begin{axis}[eda line, ymax = 1.0, ymin = 0.5, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+      ylabel={Accuracy}, xlabel={Decision Rate},
+      ylabel near ticks, xlabel near ticks,
+      tick label style={font=\footnotesize},
+      label style={font=\footnotesize},
+      height=3.5cm, width=4.25cm,
+      legend pos=south west, legend columns=1,
+      legend style={nodes={scale=0.7, transform shape}, at={(0.24,0.45)},anchor=north},
+      xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+
+      \addplot+[mambacolor4] table[x index = 0, y index = 1, header = false,
+      each nth point=100] {expres/dr/CC_n_dx1_dz3.dat};
+      \addlegendentry{$\dim(\Xb) = 1$}
+      \addplot+[mambacolor3] table[x index = 0, y index = 1, header = false,
+      each nth point=100] {expres/dr/CC_n_dx3_dz3.dat};
+      \addlegendentry{$\dim(\Xb) = 3$}
+      \addplot+[mambacolor6] table[x index = 0, y index = 1, header = false,
+      each nth point=100] {expres/dr/CC_n_dx6_dz3.dat};
+      \addlegendentry{$\dim(\Xb) = 6$}
+      \addplot+[mambacolor1] table[x index = 0, y index = 1, header = false,
+      each nth point=100] {expres/dr/CC_n_dx9_dz3.dat};
+      \addlegendentry{$\dim(\Xb) = 9$}
+      \addplot[dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};      
+      % \addplot[mark=none, red] coordinates {(0,0.5) (1,0.5)};
+      % \addplot[red, dashed, name path=L] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/n_synth_lower.dat};
+      % \addplot[red, dashed, name path=U] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/n_synth_upper.dat};
+      % \addplot[pattern=north west lines, pattern color=red!50]fill between[of=L and U, soft clip={domain=0:1}];
+    \end{axis}
+  \end{tikzpicture}%
+  \begin{tikzpicture}
+    \begin{axis}[eda line, ymax = 1.0, ymin = 0.5, ytick={1.0,0.9,0.8,0.7,0.6,0.5},
+      ylabel={}, xlabel={Decision Rate},
+      ylabel near ticks, xlabel near ticks,
+      tick label style={font=\footnotesize},
+      label style={font=\footnotesize},
+      height=3.5cm, width=4.25cm,
+      legend pos=south west, legend columns=1,
+      legend style={nodes={scale=0.7, transform shape}, at={(0.25,0.5)},anchor=north},
+      xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+
+      \addplot+[mambacolor6] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/CC_mixed_dx6_dz3.dat};
+      \addplot+[mambacolor1] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/CC_mixed_dx9_dz3.dat};
+      \addplot+[mambacolor3] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/CC_mixed_dx3_dz3.dat};
+      \addplot+[mambacolor4] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/CC_mixed_dx1_dz3.dat};
+      \addplot[dotted, mark=none, red] coordinates {(0,0.5) (1,0.5)};      
+      % \addplot[red, dashed, name path=L] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/mixed_synth_lower.dat};
+      %\addplot[red, dashed, name path=U] table[x index = 0, y index = 1, header = false, each nth point=100] {expres/dr/mixed_synth_upper.dat};
+      % \addplot[pattern=north west lines, pattern color=red!50]fill between[of=L and U, soft clip={domain=0:1}];
+    \end{axis}
+  \end{tikzpicture}
+  \label{fig:synth}
+\end{figure}

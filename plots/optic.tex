@@ -1,0 +1,25 @@
+\begin{figure}[t]
+  \begin{tikzpicture}
+    \begin{axis}[eda line, ymin = -0.15, ymax = 0.15,
+      ytick={-0.15, -0.10, -0.05, 0, 0.05, 0.10, 0.15},
+      yticklabel style={/pgf/number format/fixed},
+      ylabel={Signed Confidence}, xlabel={Strength of Confounding},
+      ylabel near ticks, xlabel near ticks,
+      tick label style={font=\footnotesize},
+      label style={font=\footnotesize},
+      height=3.5cm, width=7.75cm,
+      legend pos=south east, legend columns=1,
+      legend style={nodes={scale=0.5, transform shape}, at={(0.75,0.35)},anchor=north},
+      xmin=0, xmax=1, xtick={0,0.25,0.5,0.75,1}]
+      \addplot+[only marks, mark=*] table[x index = 0, y index = 1, header = false] {expres/opt/signed_conf.dat};
+      \addplot[dotted,red] coordinates {(0,0) (1,0)};
+    \end{axis}
+  \end{tikzpicture}%
+  \hfill~
+  \label{fig:opt}
+\end{figure}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "paper"
+%%% End:

@@ -1,0 +1,111 @@
+# Copyright (c) 2017  Dominik Janzing  [dominik.janzing@tuebingen.mpg.de]
+# All rights reserved.  See the file COPYING for license terms. 
+
+
+====== Disclaimer========================================
+The user shoud be warned that inferring causal relations from purely observational data is a difficult enterprise. I disrecommend to use this software without understanding its highly idealized model assumptions.
+=========================================================
+
+
+
+====== Reference ========================================
+This is the code reproducing the results of the paper
+'Detecting confounding in multivariate linear models via spectral analysis' by Dominik Janzing and Bernhard Schoelkopf, Journal of Causal Inference, 2017.
+=========================================================
+
+
+
+====== Dependences ======================================
+no special R packages are needed
+=========================================================
+
+
+
+====== Preparation ======================================
+Open the files 'simulation.R', 'apply_method_to_data_from_file.R', 'plot_spectral_measure_general_real_data.R'
+ 
+and change the line    path = 'YOUR PATH'  by inserting the path of the directory containing this software
+=========================================================
+
+
+
+====== Run the code =====================================
+Check the respective files for the input of the fucntions
+
+1) To reproduce the scatter plots in Figure 4, run 'simulation.R'
+
+
+2) To reproduce Figure 7 (left) run 'plot_spectral_measure_general_real_data.R' 
+   with the following options when prompted:
+   -  choose the data directory 'taste_of_wine' 
+   -  choose the data set 'winequality_red.csv' 
+   -  header = y
+   -  separator = ;
+   -  normalized = y
+   -  component to drop: just type enter
+
+3) To reproduce Figure 7 (right) run 'plot_spectral_measure_general_real_data.R' 
+   with the following options when prompted:
+   -  choose the data directory 'taste_of_wine' 
+   -  choose the data set 'winequality_red.csv' 
+   -  header = y
+   -  separator = ;
+   -  normalized = y
+   -  component to drop: 11
+
+4) To reproduce the results of Section 8.1 run 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'taste_of_wine' 
+   -  choose the data set 'winequality_red.csv' 
+   -  header = y
+   -  separator = ;
+   -  normalized = y
+   -  component to drop: enter (to obtain the result 0.0) or 11 (to obtain the result 0.55)
+
+5) To reproduce the results of Section 8.2 run 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'Chicago_proverty_and_crime' 
+   -  choose the data set 'Chicago_proverty_and_crime_formatted.csv' 
+   -  header = y
+   -  separator = ,
+   -  normalized = y
+   -  component to drop: enter
+
+6) To reproduce the results of Section 8.3 run 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'strength_of_concrete' 
+   -  choose the data set 'concrete_Data.csv' 
+   -  header = y
+   -  separator = ;
+   -  normalized = y
+   -  component to drop: enter
+
+7) To reproduce the results of Figure 6 run 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'optical device' 
+   -  choose either of the 11 data sets not ending with 'random_image_section.txt' or  'pure_confounding.txt' 
+   -  header = n
+   -  separator = 
+   -  normalized = n
+   -  component to drop: 10
+
+8) To reproduce the result of Section 7.2 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'optical device' 
+   -  choose the file ending with  'random_image_section.txt' 
+   -  header = n
+   -  separator = 
+   -  normalized = n
+   -  component to drop: 10
+
+9) To reproduce the result of Section 7.3 'apply_method_to_data_from_file.R'
+   with the following options when prompted:
+   -  choose the data directory 'optical device' 
+   -  choose the file ending with  'pure_confounding.txt' 
+   -  header = n
+   -  separator = 
+   -  normalized = n
+   -  component to drop: 10
+
+
+

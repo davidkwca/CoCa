@@ -1,0 +1,13 @@
+the data matrix 'first_10_channels.txt'   has been generated from the MEG data found at 
+http://research.ics.aalto.fi/ica/eegmeg/MEG_data.htm
+The copyright restrictions can be found there. 
+
+
+To enable the experiments describes in Section 8.3 the files 'MEG_channel_j_is_target.txt' are generated from the above file by shuffling columns:
+
+The data sets 'MEG_channel_j_is_target.txt' with j=1,...,10 contains the jth column at the end
+
+
+
+
+
