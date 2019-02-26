@@ -1,0 +1,15 @@
+trajectories/InSilicoSize100-Ecoli1-trajectories.tsv
+trajectories/InSilicoSize100-Ecoli2-trajectories.tsv
+trajectories/InSilicoSize100-Yeast1-trajectories.tsv
+trajectories/InSilicoSize100-Yeast2-trajectories.tsv
+trajectories/InSilicoSize100-Yeast3-trajectories.tsv
+trajectories/InSilicoSize10-Ecoli1-trajectories.tsv
+trajectories/InSilicoSize10-Ecoli2-trajectories.tsv
+trajectories/InSilicoSize10-Yeast1-trajectories.tsv
+trajectories/InSilicoSize10-Yeast2-trajectories.tsv
+trajectories/InSilicoSize10-Yeast3-trajectories.tsv
+trajectories/InSilicoSize50-Ecoli1-trajectories.tsv
+trajectories/InSilicoSize50-Ecoli2-trajectories.tsv
+trajectories/InSilicoSize50-Yeast1-trajectories.tsv
+trajectories/InSilicoSize50-Yeast2-trajectories.tsv
+trajectories/InSilicoSize50-Yeast3-trajectories.tsv
