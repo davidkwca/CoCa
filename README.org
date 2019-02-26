@@ -1,8 +1,9 @@
 * What is this?
-  This is a bunch of badly written code to attempt distinguishing between datasets which are causal and which are confounded.
+  This is a bunch of badly written code to attempt distinguishing between datasets which are causal and those which are confounded.
   I.e. given some data X and Y where it /looks/ as if X causes Y, we want to know whether there might actually be a better explanation by assuming that they are both caused by some common latent variable Z.
 
-  Here, this is done by comparing a model where the relationship between X and Y is linear, and a model where the relationship between Z and (X, Y) is linear.
+  Here, this is done by comparing a model where the relationship between X and Y is linear, and a model where the relationship between Z and (X, Y) is linear. 
+  The precise method and its theoretical grounding are described in our paper [[https://arxiv.org/abs/1901.06950][We Are Not Your Real Parents: Telling Causal from Confounded using MDL]].
 * Environment and Data
   The precise packages used for this project are listed in ~requirements.txt~.
   All data is contained in the ~data~ directory or has to be created by running a script as explained below.
