@@ -6,7 +6,7 @@
 * Environment and Data
   The precise packages used for this project are listed in ~requirements.txt~.
   All data is contained in the ~data~ directory or has to be created by running a script as explained below.
-  The data in ~data/gene_network~ is taken from the DREAM3 challenge[fn:1]. The data in ~data/tubingen-pairs~ is taken from the Tübingen pairs database for cause-effect pairs[fn:2].
+  The data in ~data/gene_network~ is taken from the [[http://dreamchallenges.org/project/dream-3-in-silico-network-challenge/][DREAM3]] challenge. The data in ~data/tubingen-pairs~ is taken from the [[https://webdav.tuebingen.mpg.de/cause-effect/][Tübingen pairs database for cause-effect pairs]].
 * How do I use this?
   If you are looking at this code base, you 
   a) want to reproduce my results, or
@@ -87,6 +87,3 @@
    python run_on_any_data.py -in DATA_FILE -out OUTPUT_FILE -delim DELIMITER
    #+END_SRC
    If ~OUTPUT_FILE~ is missing, the outputs will be printed to the command line instead. If ~DELIMITER~ is not given, the data will be assumed to be separated by a single space. Further, the data for ~Y~ is assumed to be in the last column of the data. 
-* Footnotes
-[fn:1] http://dreamchallenges.org/project/dream-3-in-silico-network-challenge/
-[fn:2] https://webdav.tuebingen.mpg.de/cause-effect/
