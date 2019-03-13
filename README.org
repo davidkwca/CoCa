@@ -4,8 +4,6 @@
 #+DATE: March 6, 2019
 
 * What is this?
-   This is a bunch of badly written code to attempt distinguishing between datasets which are causal and those which are confounded.
-   I.e. given some data X and Y where it /looks/ as if X causes Y, we want to know whether there might actually be a better explanation by assuming that they are both caused by some common latent variable Z.
    This package contains the source code for our recent publications on telling whether, given a sample over the joint distribution of a pair of continuous random variables X and Y for which it seems that X causes Y, the dependency is indeed causal, or whether it is confounded by a hidden variable Z.
    We do so by comparing a model under which the data has been generated in a directly causal manner from X to Y with a model where both X and Y are co-caused by a common confounder Z.
 This code entails the prototype implementation and is aimed at reproducing the results presented in [1,2] as well as can be used to infer confounding for your own pairs (X,Y).
