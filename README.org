@@ -1,9 +1,17 @@
-* What is this?
-  This is a bunch of badly written code to attempt distinguishing between datasets which are causal and those which are confounded.
-  I.e. given some data X and Y where it /looks/ as if X causes Y, we want to know whether there might actually be a better explanation by assuming that they are both caused by some common latent variable Z.
+#+OPTIONS: toc:nil 
+#+AUTHOR: David Kaltenpoth
+#+TITLE: Confounded or Causal Python Code Package v1.0
+#+DATE: March 6, 2019
 
-  Here, this is done by comparing a model where the relationship between X and Y is linear, and a model where the relationship between Z and (X, Y) is linear. 
-  The precise method and its theoretical grounding are described in our paper [[https://arxiv.org/abs/1901.06950][We Are Not Your Real Parents: Telling Causal from Confounded using MDL]].
+* What is this?
+   This is a bunch of badly written code to attempt distinguishing between datasets which are causal and those which are confounded.
+   I.e. given some data X and Y where it /looks/ as if X causes Y, we want to know whether there might actually be a better explanation by assuming that they are both caused by some common latent variable Z.
+   This package contains the source code for our recent publications on telling whether, given a sample over the joint distribution of a pair of continuous random variables X and Y for which it seems that X causes Y, the dependency is indeed causal, or whether it is confounded by a hidden variable Z.
+   We do so by comparing a model under which the data has been generated in a directly causal manner from X to Y with a model where both X and Y are co-caused by a common confounder Z.
+This code entails the prototype implementation and is aimed at reproducing the results presented in [1,2] as well as can be used to infer confounding for your own pairs (X,Y).
+
+   Here, this is done by comparing a model where the relationship between X and Y is linear, and a model where the relationship between Z and (X, Y) is linear. 
+   The precise method and its theoretical grounding are described in our paper [[https://arxiv.org/abs/1901.06950][We Are Not Your Real Parents: Telling Causal from Confounded using MDL]].
 * Environment and Data
   The precise packages used for this project are listed in ~requirements.txt~.
   All data is contained in the ~data~ directory or has to be created by running a script as explained below.
@@ -72,7 +80,9 @@
     python tikz_data.py -data 'pair'
     #+END_SRC
 *** Optical Data (Section 5.4)
-    For the optical data, the data can be found in ~other_code/confounder_detection_linear/data/optical_device/~. To run the script to generate the data for the plots, simply run
+    The optical data can be found in\\
+    ~other_code/confounder_detection_linear/data/optical_device/~.\\
+    To run the script to generate the data for the plots, simply run
     #+BEGIN_SRC shell
     bash scripts/optic_script.sh
     #+END_SRC
