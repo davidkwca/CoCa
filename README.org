@@ -1,7 +1,6 @@
 #+OPTIONS: toc:nil 
 #+AUTHOR: David Kaltenpoth
 #+TITLE: Confounded or Causal Python Code Package v1.0
-#+DATE: March 6, 2019
 
 * What is this?
    This package contains the source code for our recent publications on telling whether, given a sample over the joint distribution of a pair of continuous random variables X and Y for which it seems that X causes Y, the dependency is indeed causal, or whether it is confounded by a hidden variable Z.
